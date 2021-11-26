@@ -1,0 +1,23 @@
+<nav class="navbar navbar-light bg-light">
+    <form class="container-fluid">
+      <div class="input-group">
+        <span (click)="Onsearch(name)" class="input-group-text" id="basic-addon1">Go</span>
+        <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" [value]="name">
+        <input type="text" class="form-control" (ngModelChange)="setPrice()" placeholder="Price" aria-label="Price" aria-describedby="basic-addon2" [value]="price">
+      </div>
+    </form>
+</nav>
+<main class="row text-center">
+    <section class=" col-sm-1"></section>
+    <section class="rounded s_style col-sm-4">
+        <h1>Searching ...</h1>
+        <br>
+        <app-result onWay="onWay"></app-result>
+    </section>
+    <section class="rounded  s_style col-sm-6">
+        <h1>Best Result</h1>
+        <div class="row p-3">
+            <app-result *ngFor="let r of bestR" class="col-sm-3" onWay="r"></app-result>
+        </div>
+    </section>
+</main>
