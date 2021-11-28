@@ -6,7 +6,7 @@ const app = express();
 app.use(express.static(__dirname + "dist/SheinBoot"));
 
 app.get('/*', (req, res) => {
-    res.sendFile(path.join(__dirname + "dist/SheinBoot/index.html"))
+    res.sendFile(path.join(__dirname + "dist/SheinBoot"))
 })
 
 app.listen(process.env.PORT);
