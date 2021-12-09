@@ -1,8 +1,8 @@
-<div class="m-3" *ngIf="onWay !== null">
-    <img [src]="onWay.image" alt="">
+<div class="m-3" *ngIf="onWay.length !== 0">
+    <img [src]="'https:' + onWay.image" class="image responsive-image w-50" alt="">
     <h3>{{onWay.name}}</h3>
     <h2>{{onWay.price}}</h2>
     <div class="justify-content-right">
-        <a [href]="onWay.link">follow</a>
+        <a [href]="'https:' + onWay.link">follow</a>
     </div>
 </div>

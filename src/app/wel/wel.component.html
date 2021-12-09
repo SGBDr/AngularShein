@@ -1,7 +1,7 @@
 <nav class="navbar navbar-light bg-light">
     <form class="container-fluid">
       <div class="input-group">
-        <span (click)="Onsearch(name)" class="input-group-text" id="basic-addon1">Go</span>
+        <span (click)="Onsearch(name)" style="cursor: pointer;" class="input-group-text" id="basic-addon1">Go</span>
         <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" [value]="name">
         <input type="text" class="form-control" (ngModelChange)="setPrice()" placeholder="Price" aria-label="Price" aria-describedby="basic-addon2" [value]="price">
       </div>
@@ -12,12 +12,15 @@
     <section class="rounded s_style col-sm-4">
         <h1>Searching ...</h1>
         <br>
-        <app-result onWay="onWay"></app-result>
+        <app-result [onWay]="onWay"></app-result>
     </section>
-    <section class="rounded  s_style col-sm-6">
+    <section class="rounded  s_style col-sm-6" style="overflow-y: auto;">
         <h1>Best Result</h1>
-        <div class="row p-3">
-            <app-result *ngFor="let r of bestR" class="col-sm-3" onWay="r"></app-result>
+        <div *ngIf="ss" class="row p-4">
+            <app-result *ngFor="let r of bestR" class="col-sm-5 p-1 m-1" [onWay]="r"></app-result>
+        </div>
+        <div *ngIf="!ss">
+            <progress></progress>
         </div>
     </section>
 </main>

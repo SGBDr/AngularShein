@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import * as $ from 'jquery';
 
 @Component({
@@ -11,10 +11,10 @@ export class WelComponent implements OnInit {
 
   bestR : any[] = []
   Result : any[] = []
-  onWay : any = []
-
+  onWay = []
   price : string = "20"
   name : string = "robe"
+  ss : boolean = false;
 
   constructor(private httpclient : HttpClient) { 
     
@@ -32,23 +32,31 @@ export class WelComponent implements OnInit {
   }
 
   exploitResults(){
-    setInterval(() => {
-      for(let r of this.Result){
-        if(r.price.indexOf(this.price))this.bestR.push(r)
+      this.ss = true;
+      for(let i = 0; i < this.Result.length; i++){
+        let r = this.Result[i];
+        setTimeout(() => {
+          this.onWay = r
+          if(r.name.toLowerCase().indexOf(this.name.toLocaleLowerCase()) != -1)this.bestR.push(r)
+        }, 1000*i)
       }
-    }, 1500)
+    
   }
 
   search(name : String){
     this.price.replace('€', '')
+    this.ss = false
+    this.Result = []
     this.httpclient
-        .get<any[]>("localhost:8080/bot/" + name + "/" + this.price)
+        .get<any>("https://sheinboot.herokuapp.com/springbot/" + name + "/" + this.price)
         .subscribe(
           (r) => {
             this.Result = r
+            console.log(r)
+            this.exploitResults()
           },
-          (e) => {
-            console.log('Erreur ! : ' + e);
+          (error) => {
+            console.log(error.error);
           }
         );
   }
